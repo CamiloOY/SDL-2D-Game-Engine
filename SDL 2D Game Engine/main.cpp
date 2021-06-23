@@ -2,7 +2,7 @@
 
 int main() {
 	Game* game = new Game();
-	game->init("SDL Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 500, 500, false);
+	game->init("SDL Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
 	while(game->isRunning()) {
 		game->handleEvents();
 		game->update();

@@ -1,5 +1,9 @@
 #include "Game.h"
 
+SDL_Texture* player_texture;
+SDL_Rect source_rectangle, destination_rectangle;
+int count = 0;
+
 Game::Game() {
 }
 
@@ -21,6 +25,9 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 				SDL_SetRenderDrawColor(this->renderer, 255, 255, 255, 255);
 				std::cout << "Renderer successfully created" << std::endl;
 				this->running = true;
+				SDL_Surface* temp_surface = IMG_Load("assets/pirate.png");
+				player_texture = SDL_CreateTextureFromSurface(this->renderer, temp_surface);
+				SDL_FreeSurface(temp_surface);
 			}
 		}
 	}
@@ -39,10 +46,17 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
+	destination_rectangle.w = 36;
+	destination_rectangle.h = 116;
+	int width;
+	SDL_GetWindowSize(this->window, &width, nullptr);
+	destination_rectangle.x = count % width;
+	count++;
 }
 
 void Game::render() {
 	SDL_RenderClear(this->renderer);
+	SDL_RenderCopy(this->renderer, player_texture, NULL, &destination_rectangle);
 	SDL_RenderPresent(this->renderer);
 }
 
