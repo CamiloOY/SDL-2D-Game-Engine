@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "TextureManager.h"
 
 SDL_Texture* player_texture;
 SDL_Rect source_rectangle, destination_rectangle;
@@ -25,9 +26,7 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 				SDL_SetRenderDrawColor(this->renderer, 255, 255, 255, 255);
 				std::cout << "Renderer successfully created" << std::endl;
 				this->running = true;
-				SDL_Surface* temp_surface = IMG_Load("assets/pirate.png");
-				player_texture = SDL_CreateTextureFromSurface(this->renderer, temp_surface);
-				SDL_FreeSurface(temp_surface);
+				player_texture = TextureManager::LoadTexture("assets/pirate.png", this->renderer);
 			}
 		}
 	}

@@ -3,7 +3,7 @@
 #define SDL_MAIN_HANDLED
 #include <SDL.h>
 #include <iostream>
-#include <SDL_image.h>
+//#include <SDL_image.h>
 
 class Game {
 public:
