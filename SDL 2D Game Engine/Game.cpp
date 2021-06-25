@@ -1,9 +1,8 @@
 #include "Game.h"
 #include "TextureManager.h"
+#include "GameObject.h"
 
-SDL_Texture* player_texture;
-SDL_Rect source_rectangle, destination_rectangle;
-int count = 0;
+GameObject* player;
 
 Game::Game() {
 }
@@ -26,7 +25,7 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 				SDL_SetRenderDrawColor(this->renderer, 255, 255, 255, 255);
 				std::cout << "Renderer successfully created" << std::endl;
 				this->running = true;
-				player_texture = TextureManager::LoadTexture("assets/pirate.png", this->renderer);
+				player = new GameObject("assets/pirate.png", this->renderer);
 			}
 		}
 	}
@@ -45,17 +44,12 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-	destination_rectangle.w = 36;
-	destination_rectangle.h = 116;
-	int width;
-	SDL_GetWindowSize(this->window, &width, nullptr);
-	destination_rectangle.x = count % width;
-	count++;
+	player->update();
 }
 
 void Game::render() {
 	SDL_RenderClear(this->renderer);
-	SDL_RenderCopy(this->renderer, player_texture, NULL, &destination_rectangle);
+	player->render();
 	SDL_RenderPresent(this->renderer);
 }
 
