@@ -1,11 +1,11 @@
 #pragma once
 
-#include <SDL.h>
+#include "Game.h"
 #include <SDL_image.h>
 
 class TextureManager {
-
 public:
-	static SDL_Texture* LoadTexture(const char* filename, SDL_Renderer* renderer);
+	static SDL_Texture* LoadTexture(const char* filename);
+	static void DrawTexture(SDL_Texture* texture, SDL_Rect source_rect, SDL_Rect destination_rect);
 };
 

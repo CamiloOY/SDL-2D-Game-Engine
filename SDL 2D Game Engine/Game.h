@@ -15,10 +15,10 @@ public:
 	void render();
 	void clean();
 	bool isRunning();
+	static SDL_Renderer* renderer;
 
 private:
 	bool running = false;
 	SDL_Window* window;
-	SDL_Renderer* renderer;
 };
 

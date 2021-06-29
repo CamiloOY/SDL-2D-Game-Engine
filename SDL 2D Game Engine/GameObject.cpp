@@ -1,12 +1,8 @@
 #include "GameObject.h"
 #include <iostream>
 
-GameObject::GameObject(const char* texture, SDL_Renderer* renderer, int x, int y) {
-	if(!renderer) {
-		throw "No renderer for GameObject";
-	}
-	this->renderer = renderer;
-	this->texture = TextureManager::LoadTexture(texture, renderer);
+GameObject::GameObject(const char* texture, int x, int y) {
+	this->texture = TextureManager::LoadTexture(texture);
 	this->x = x;
 	this->y = y;
 
@@ -31,5 +27,5 @@ void GameObject::update() {
 }
 
 void GameObject::render() {
-	SDL_RenderCopy(this->renderer, this->texture, &this->source_rectangle, &this->destination_rectangle);
+	SDL_RenderCopy(Game::renderer, this->texture, &this->source_rectangle, &this->destination_rectangle);
 }

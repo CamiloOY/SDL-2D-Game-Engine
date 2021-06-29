@@ -1,8 +1,11 @@
 #include "Game.h"
 #include "TextureManager.h"
 #include "GameObject.h"
+#include "Tilemap.h"
 
 GameObject* player;
+SDL_Renderer* Game::renderer = nullptr;
+Tilemap* tilemap;
 
 Game::Game() {
 }
@@ -25,7 +28,8 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 				SDL_SetRenderDrawColor(this->renderer, 255, 255, 255, 255);
 				std::cout << "Renderer successfully created" << std::endl;
 				this->running = true;
-				player = new GameObject("assets/pirate.png", this->renderer);
+				player = new GameObject("assets/pirate.png");
+				tilemap = new Tilemap();
 			}
 		}
 	}
@@ -49,6 +53,7 @@ void Game::update() {
 
 void Game::render() {
 	SDL_RenderClear(this->renderer);
+	tilemap->drawTilemap();
 	player->render();
 	SDL_RenderPresent(this->renderer);
 }
