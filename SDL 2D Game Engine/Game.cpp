@@ -2,10 +2,16 @@
 #include "TextureManager.h"
 #include "GameObject.h"
 #include "Tilemap.h"
+#include "Manager.h"
+#include "Components.h"
+#include "RenderSystem.h"
 
 GameObject* player;
 SDL_Renderer* Game::renderer = nullptr;
 Tilemap* tilemap;
+Entity playr;
+
+Manager manager;
 
 Game::Game() {
 }
@@ -30,6 +36,20 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 				this->running = true;
 				player = new GameObject("assets/pirate.png");
 				tilemap = new Tilemap();
+				manager.init();
+				playr = manager.createEntity();
+				manager.registerComponent<Sprite>();
+				manager.registerComponent<Transform>();
+				auto renderSystem = manager.registerSystem<RenderSystem>();
+				Signature render_system_sig;
+				render_system_sig.set(manager.getComponentType<Sprite>());
+				render_system_sig.set(manager.getComponentType<Transform>());
+				manager.setSystemSignature<RenderSystem>(render_system_sig);
+				Sprite player_sprite;
+				player_sprite.texture = TextureManager::LoadTexture("assets/pirate.png");
+				Transform player_transform = {{33, 33}};
+				manager.addComponent<Sprite>(playr, player_sprite);
+				manager.addComponent<Transform>(playr, player_transform);
 			}
 		}
 	}
@@ -49,12 +69,14 @@ void Game::handleEvents() {
 
 void Game::update() {
 	player->update();
+	manager.update();
 }
 
 void Game::render() {
 	SDL_RenderClear(this->renderer);
 	tilemap->drawTilemap();
 	player->render();
+	manager.render();
 	SDL_RenderPresent(this->renderer);
 }
 

@@ -2,8 +2,11 @@
 
 #include "Types.h"
 #include <set>
+#include <llvm/ADT/DenseSet.h>
 
 class System {
 public:
-	std::set<Entity> entities; // Set of entities that match this system's signature
+	virtual void update(){};
+	virtual void render(){};
+	llvm::DenseSet<Entity> entities; // Set of entities that match this system's signature
 };

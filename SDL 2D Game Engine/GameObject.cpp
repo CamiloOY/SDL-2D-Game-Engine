@@ -12,8 +12,8 @@ void GameObject::update() {
 	int w, h;
 	SDL_QueryTexture(this->texture, nullptr, nullptr, &w, &h);
 
-	this->x++;
-	this->y++;
+	//this->x++;
+	//this->y++;
 
 	this->source_rectangle.w = w;
 	this->source_rectangle.h = h;
