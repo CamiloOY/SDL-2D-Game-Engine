@@ -18,3 +18,10 @@ struct Vec2f {
 	float x;
 	float y;
 };
+
+enum class Command : unsigned short {
+	MOVE_LEFT,
+	MOVE_RIGHT,
+	MOVE_UP,
+	MOVE_DOWN
+};

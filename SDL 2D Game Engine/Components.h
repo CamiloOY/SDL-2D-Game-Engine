@@ -3,11 +3,15 @@
 #include <SDL.h>
 #include "Types.h"
 
-typedef struct Sprite {
+struct Sprite {
 	SDL_Texture* texture;
-} Sprite;
+};
 
-typedef struct Transform {
+struct Transform {
 	Vec2 position = {0, 0};
 	Vec2 scale = {1, 1};
-} Transform;
+};
+
+struct Movement {
+	int speed = 1;
+};
