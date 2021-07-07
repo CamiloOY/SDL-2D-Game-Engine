@@ -6,7 +6,7 @@
 #include "Components.h"
 #include "RenderSystem.h"
 
-GameObject* player;
+//GameObject* player;
 SDL_Renderer* Game::renderer = nullptr;
 Tilemap* tilemap;
 Entity playr;
@@ -34,7 +34,7 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 				SDL_SetRenderDrawColor(this->renderer, 255, 255, 255, 255);
 				std::cout << "Renderer successfully created" << std::endl;
 				this->running = true;
-				player = new GameObject("assets/pirate.png");
+				//player = new GameObject("assets/pirate.png");
 				tilemap = new Tilemap();
 				manager.init();
 				playr = manager.createEntity();
@@ -68,14 +68,14 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-	player->update();
+	//player->update();
 	manager.update();
 }
 
 void Game::render() {
 	SDL_RenderClear(this->renderer);
 	tilemap->drawTilemap();
-	player->render();
+	//player->render();
 	manager.render();
 	SDL_RenderPresent(this->renderer);
 }

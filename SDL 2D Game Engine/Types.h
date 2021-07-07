@@ -9,7 +9,12 @@ using Entity = std::uint32_t;
 const Entity MAX_ENTITIES = 8192;
 using Signature = std::bitset<MAX_COMPONENTS>;
 
-typedef struct Vec2 {
+struct Vec2 {
 	int x;
 	int y;
-} Vec2;
+};
+
+struct Vec2f {
+	float x;
+	float y;
+};

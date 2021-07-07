@@ -151,11 +151,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ComponentArray.cpp" />
     <ClCompile Include="ComponentManager.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
@@ -169,7 +167,6 @@
     <ClInclude Include="Components.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="System.h" />
