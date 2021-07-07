@@ -19,7 +19,8 @@ struct Vec2f {
 	float y;
 };
 
-enum class Command : unsigned short {
+// A command is a number representing an action that can the player can trigger
+enum class Command : uint8_t {
 	MOVE_LEFT,
 	MOVE_RIGHT,
 	MOVE_UP,

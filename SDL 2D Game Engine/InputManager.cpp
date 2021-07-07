@@ -7,13 +7,13 @@ InputManager::InputManager() {
 	key_to_command[SDL_GetKeyFromName("S")] = Command::MOVE_DOWN;
 }
 
-void InputManager::receiveEvent(SDL_Event* e) {
+void InputManager::handleEvent(SDL_Event* e) {
 	switch(e->type) {
 	case SDL_KEYDOWN:
-		commands[static_cast<unsigned short>(key_to_command.lookup((SDL_KeyCode&) e->key.keysym.sym))] = true;
+		commands[static_cast<uint8_t>(key_to_command.lookup((SDL_KeyCode&) e->key.keysym.sym))] = true;
 		break;
 	case SDL_KEYUP:
-		commands[static_cast<unsigned short>(key_to_command.lookup((SDL_KeyCode&) e->key.keysym.sym))] = false;
+		commands[static_cast<uint8_t>(key_to_command.lookup((SDL_KeyCode&) e->key.keysym.sym))] = false;
 		break;
 	default:
 		break;
@@ -25,5 +25,9 @@ SDL_Event& InputManager::getEvent() {
 }
 
 bool InputManager::getCommand(Command c) {
-	return commands[static_cast<unsigned short>(c)];
+	return commands[static_cast<uint8_t>(c)];
+}
+
+void InputManager::setKeyCommand(SDL_Keycode key, Command command) {
+	key_to_command[key] = command;
 }

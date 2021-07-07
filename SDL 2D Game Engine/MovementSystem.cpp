@@ -3,6 +3,7 @@
 #include "Components.h"
 
 void MovementSystem::update() {
+	// Build direction vector
 	Vec2 direction = {0, 0};
 	if(inputManager.getCommand(Command::MOVE_LEFT)) {
 		direction.x -= 1;
@@ -16,7 +17,8 @@ void MovementSystem::update() {
 	if(inputManager.getCommand(Command::MOVE_DOWN)) {
 		direction.y += 1;
 	}
-	this->move(direction);
+
+	this->move(direction); // Move
 }
 
 void MovementSystem::move(Vec2 direction) {

@@ -79,7 +79,7 @@ void Game::handleEvents() {
 			break;
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
-			inputManager.receiveEvent(&e);
+			inputManager.handleEvent(&e);
 			break;
 		default:
 			break;

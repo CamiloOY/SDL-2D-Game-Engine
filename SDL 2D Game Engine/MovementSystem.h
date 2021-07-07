@@ -12,5 +12,5 @@ public:
 	void update();
 
 private:
-	void move(Vec2 direction);
+	void move(Vec2 direction); // Moves entities in the provided direction
 };
