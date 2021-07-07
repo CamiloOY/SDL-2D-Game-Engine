@@ -9,9 +9,16 @@ struct Sprite {
 
 struct Transform {
 	Vec2 position = {0, 0};
-	Vec2 scale = {1, 1};
+	Vec2f scale = {1, 1};
 };
 
 struct Movement {
 	int speed = 1;
+};
+
+struct BasicEnemyAI {
+	int direction = 1;
+	float speed = 1;
+	int distance = 50;
+	int travelled = 0;
 };

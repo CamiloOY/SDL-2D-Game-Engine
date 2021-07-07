@@ -6,12 +6,15 @@
 #include "RenderSystem.h"
 #include "InputManager.h"
 #include "MovementSystem.h"
+#include "BasicEnemyAISystem.h"
 
 SDL_Renderer* Game::renderer = nullptr;
 Tilemap* tilemap;
 Entity player;
+Entity slime;
 std::shared_ptr<RenderSystem> renderSystem;
 std::shared_ptr<MovementSystem> movementSystem;
+std::shared_ptr<BasicEnemyAISystem> basicEnemyAISystem;
 
 Manager manager;
 InputManager inputManager;
@@ -41,10 +44,12 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 
 				manager.init();
 				player = manager.createEntity();
+				slime = manager.createEntity();
 
 				manager.registerComponent<Sprite>();
 				manager.registerComponent<Transform>();
 				manager.registerComponent<Movement>();
+				manager.registerComponent<BasicEnemyAI>();
 
 				renderSystem = manager.registerSystem<RenderSystem>();
 				Signature render_system_sig;
@@ -58,13 +63,27 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 				movement_system_sig.set(manager.getComponentType<Movement>());
 				manager.setSystemSignature<MovementSystem>(movement_system_sig);
 
+				basicEnemyAISystem = manager.registerSystem<BasicEnemyAISystem>();
+				Signature basic_enemy_ai_system_sig;
+				basic_enemy_ai_system_sig.set(manager.getComponentType<BasicEnemyAI>());
+				basic_enemy_ai_system_sig.set(manager.getComponentType<Transform>());
+				manager.setSystemSignature<BasicEnemyAISystem>(basic_enemy_ai_system_sig);
+
 				Sprite player_sprite;
 				player_sprite.texture = TextureManager::LoadTexture("assets/pirate.png");
+				Sprite slime_sprite;
+				slime_sprite.texture = TextureManager::LoadTexture("assets/slime.png");
 				Transform player_transform = {{33, 33}};
+				Transform slime_transform = {{400, 99}, {4, 4}};
 				Movement player_movement = {3};
+				BasicEnemyAI slime_ai = {1, 1, 100};
+
 				manager.addComponent<Sprite>(player, player_sprite);
 				manager.addComponent<Transform>(player, player_transform);
 				manager.addComponent<Movement>(player, player_movement);
+				manager.addComponent<Sprite>(slime, slime_sprite);
+				manager.addComponent<Transform>(slime, slime_transform);
+				manager.addComponent<BasicEnemyAI>(slime, slime_ai);
 			}
 		}
 	}
@@ -88,6 +107,7 @@ void Game::handleEvents() {
 
 void Game::update() {
 	movementSystem->update();
+	basicEnemyAISystem->update();
 }
 
 void Game::render() {
