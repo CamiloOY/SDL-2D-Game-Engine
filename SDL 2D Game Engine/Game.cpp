@@ -1,6 +1,5 @@
 #include "Game.h"
 #include "TextureManager.h"
-#include "GameObject.h"
 #include "Tilemap.h"
 #include "Manager.h"
 #include "Components.h"
@@ -10,6 +9,7 @@
 SDL_Renderer* Game::renderer = nullptr;
 Tilemap* tilemap;
 Entity playr;
+std::shared_ptr<RenderSystem> renderSystem;
 
 Manager manager;
 
@@ -40,7 +40,7 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 				playr = manager.createEntity();
 				manager.registerComponent<Sprite>();
 				manager.registerComponent<Transform>();
-				auto renderSystem = manager.registerSystem<RenderSystem>();
+				renderSystem = manager.registerSystem<RenderSystem>();
 				Signature render_system_sig;
 				render_system_sig.set(manager.getComponentType<Sprite>());
 				render_system_sig.set(manager.getComponentType<Transform>());
@@ -69,14 +69,13 @@ void Game::handleEvents() {
 
 void Game::update() {
 	//player->update();
-	manager.update();
 }
 
 void Game::render() {
 	SDL_RenderClear(this->renderer);
 	tilemap->drawTilemap();
 	//player->render();
-	manager.render();
+	renderSystem->render();
 	SDL_RenderPresent(this->renderer);
 }
 

@@ -10,8 +10,6 @@ public:
 	void init();
 	Entity createEntity();
 	void destroyEntity(Entity entity);
-	void update();
-	void render();
 
 	template<typename T>
 	void registerComponent() {

@@ -25,8 +25,6 @@ public:
 
 	void entityDestroyed(Entity entity);
 	void entitySignatureChanged(Entity entity, Signature signature);
-	void update();
-	void render();
 
 private:
 	llvm::DenseMap<const char*, Signature> signatures; // Map a system to its signature

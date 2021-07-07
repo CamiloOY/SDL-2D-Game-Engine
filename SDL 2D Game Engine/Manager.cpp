@@ -15,11 +15,3 @@ void Manager::destroyEntity(Entity entity) {
     component_manager->entityDestroyed(entity);
     system_manager->entityDestroyed(entity);
 }
-
-void Manager::update() {
-    system_manager->update();
-}
-
-void Manager::render() {
-    system_manager->render();
-}

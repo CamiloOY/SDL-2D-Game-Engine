@@ -17,15 +17,3 @@ void SystemManager::entitySignatureChanged(Entity entity, Signature signature) {
 		}
 	}
 }
-
-void SystemManager::update() {
-	for(auto system : systems) {
-		system.second->update();
-	}
-}
-
-void SystemManager::render() {
-	for(auto system : systems) {
-		system.second->render();
-	}
-}
