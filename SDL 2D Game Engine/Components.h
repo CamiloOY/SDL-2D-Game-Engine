@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include "Types.h"
+#include <string>
 
 struct Sprite {
 	SDL_Texture* texture;
@@ -13,7 +14,7 @@ struct Transform {
 };
 
 struct Movement {
-	int speed = 1;
+	float speed = 1;
 };
 
 struct BasicEnemyAI {
@@ -21,4 +22,11 @@ struct BasicEnemyAI {
 	float speed = 1;
 	int distance = 50;
 	int travelled = 0;
+};
+
+struct RectCollider {
+	int relative_x = 0;
+	int relative_y = 0;
+	int w;
+	int h;
 };

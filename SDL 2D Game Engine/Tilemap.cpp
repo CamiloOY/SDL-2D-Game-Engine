@@ -25,6 +25,11 @@ Tilemap::Tilemap() {
 	this->destination_rectangle.h = 32;
 }
 
+Tilemap::~Tilemap() {
+	SDL_DestroyTexture(grass);
+	SDL_DestroyTexture(dirt);
+}
+
 void Tilemap::loadTilemap(int tilemap[20][25]) {
 	for(int j = 0; j < 20; j++) {
 		for(int k = 0; k < 25; k++) {
