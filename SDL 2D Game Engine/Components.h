@@ -29,4 +29,5 @@ struct RectCollider {
 	int relative_y = 0;
 	int w;
 	int h;
+	std::string tag;
 };

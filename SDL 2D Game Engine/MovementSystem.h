@@ -3,9 +3,12 @@
 #include "System.h"
 #include "Manager.h"
 #include "InputManager.h"
+#include "CollisionSystem.h"
+#include <memory>
 
 extern Manager manager;
 extern InputManager inputManager;
+extern std::shared_ptr<CollisionSystem> collisionSystem;
 
 class MovementSystem : public System {
 public:

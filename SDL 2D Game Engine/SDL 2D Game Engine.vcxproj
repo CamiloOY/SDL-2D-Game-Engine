@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BasicEnemyAISystem.cpp" />
+    <ClCompile Include="CollisionSystem.cpp" />
     <ClCompile Include="ComponentManager.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -166,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicEnemyAISystem.h" />
+    <ClInclude Include="CollisionSystem.h" />
     <ClInclude Include="ComponentArray.h" />
     <ClInclude Include="ComponentManager.h" />
     <ClInclude Include="Components.h" />

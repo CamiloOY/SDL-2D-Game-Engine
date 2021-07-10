@@ -7,6 +7,7 @@
 #include "InputManager.h"
 #include "MovementSystem.h"
 #include "BasicEnemyAISystem.h"
+#include "CollisionSystem.h"
 
 SDL_Renderer* Game::renderer = nullptr;
 Tilemap* tilemap;
@@ -15,6 +16,7 @@ Entity slime;
 std::shared_ptr<RenderSystem> renderSystem;
 std::shared_ptr<MovementSystem> movementSystem;
 std::shared_ptr<BasicEnemyAISystem> basicEnemyAISystem;
+std::shared_ptr<CollisionSystem> collisionSystem;
 
 Manager manager;
 InputManager inputManager;
@@ -50,6 +52,7 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 				manager.registerComponent<Transform>();
 				manager.registerComponent<Movement>();
 				manager.registerComponent<BasicEnemyAI>();
+				manager.registerComponent<RectCollider>();
 
 				renderSystem = manager.registerSystem<RenderSystem>();
 				Signature render_system_sig;
@@ -69,6 +72,12 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 				basic_enemy_ai_system_sig.set(manager.getComponentType<Transform>());
 				manager.setSystemSignature<BasicEnemyAISystem>(basic_enemy_ai_system_sig);
 
+				collisionSystem = manager.registerSystem<CollisionSystem>();
+				Signature collision_system_sig;
+				collision_system_sig.set(manager.getComponentType<RectCollider>());
+				collision_system_sig.set(manager.getComponentType<Transform>());
+				manager.setSystemSignature<CollisionSystem>(collision_system_sig);
+
 				Sprite player_sprite;
 				player_sprite.texture = TextureManager::LoadTexture("assets/pirate.png");
 				Sprite slime_sprite;
@@ -77,13 +86,17 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 				Transform slime_transform = {{400, 99}, {4, 4}};
 				Movement player_movement = {3};
 				BasicEnemyAI slime_ai = {1, 1, 100};
+				RectCollider player_collider = {0, 0, 36, 116, "Player"};
+				RectCollider slime_collider = {0, 0, 60, 40, "Slime"};
 
 				manager.addComponent<Sprite>(player, player_sprite);
 				manager.addComponent<Transform>(player, player_transform);
 				manager.addComponent<Movement>(player, player_movement);
+				manager.addComponent<RectCollider>(player, player_collider);
 				manager.addComponent<Sprite>(slime, slime_sprite);
 				manager.addComponent<Transform>(slime, slime_transform);
 				manager.addComponent<BasicEnemyAI>(slime, slime_ai);
+				manager.addComponent<RectCollider>(slime, slime_collider);
 			}
 		}
 	}
@@ -108,12 +121,14 @@ void Game::handleEvents() {
 void Game::update() {
 	movementSystem->update();
 	basicEnemyAISystem->update();
+	collisionSystem->update();
 }
 
 void Game::render() {
 	SDL_RenderClear(this->renderer);
 	tilemap->drawTilemap();
 	renderSystem->render();
+	collisionSystem->render();
 	SDL_RenderPresent(this->renderer);
 }
 
