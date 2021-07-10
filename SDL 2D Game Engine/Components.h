@@ -30,4 +30,5 @@ struct RectCollider {
 	int w;
 	int h;
 	std::string tag;
+	bool draw_bounding_box = false;
 };

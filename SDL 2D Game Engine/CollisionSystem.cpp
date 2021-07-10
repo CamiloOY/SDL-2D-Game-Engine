@@ -26,15 +26,18 @@ void CollisionSystem::update() {
 	}
 }
 
+//TODO: Optimise this
 void CollisionSystem::render() {
 	for(Entity& entity : entities) {
 		RectCollider& collider = manager.getComponent<RectCollider>(entity);
-		Transform& transform = manager.getComponent<Transform>(entity);
-		float rect_x = transform.position.x + collider.relative_x;
-		float rect_y = transform.position.y + collider.relative_y;
-		SDL_RenderDrawLine(Game::renderer, rect_x, rect_y, rect_x + collider.w, rect_y);
-		SDL_RenderDrawLine(Game::renderer, rect_x, rect_y, rect_x, rect_y + collider.h);
-		SDL_RenderDrawLine(Game::renderer, rect_x + collider.w, rect_y, rect_x + collider.w, rect_y + collider.h);
-		SDL_RenderDrawLine(Game::renderer, rect_x, rect_y + collider.h, rect_x + collider.w, rect_y + collider.h);
+		if(collider.draw_bounding_box) {
+			Transform& transform = manager.getComponent<Transform>(entity);
+			float rect_x = transform.position.x + collider.relative_x;
+			float rect_y = transform.position.y + collider.relative_y;
+			SDL_RenderDrawLine(Game::renderer, rect_x, rect_y, rect_x + collider.w, rect_y);
+			SDL_RenderDrawLine(Game::renderer, rect_x, rect_y, rect_x, rect_y + collider.h);
+			SDL_RenderDrawLine(Game::renderer, rect_x + collider.w, rect_y, rect_x + collider.w, rect_y + collider.h);
+			SDL_RenderDrawLine(Game::renderer, rect_x, rect_y + collider.h, rect_x + collider.w, rect_y + collider.h);
+		}
 	}
 }
