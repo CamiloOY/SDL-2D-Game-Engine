@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include "Types.h"
 #include <string>
+#include <llvm/ADT/SmallSet.h>
 
 struct Sprite {
 	SDL_Texture* texture;
@@ -31,4 +32,5 @@ struct RectCollider {
 	int h;
 	std::string tag;
 	bool draw_bounding_box = false;
+	llvm::SmallDenseSet<Entity, 8> collisions;
 };

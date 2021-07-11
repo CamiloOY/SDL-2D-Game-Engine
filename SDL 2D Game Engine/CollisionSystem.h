@@ -10,6 +10,4 @@ class CollisionSystem : public System {
 public:
 	void update();
 	void render();
-
-	llvm::SmallSet<std::pair<Entity, Entity>, 32> collisions;
 };
