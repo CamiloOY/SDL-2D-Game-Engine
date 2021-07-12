@@ -34,3 +34,12 @@ struct RectCollider {
 	bool draw_bounding_box = false;
 	llvm::SmallDenseSet<Entity, 8> collisions;
 };
+
+struct CircleCollider {
+	int relative_x = 0;
+	int relative_y = 0;
+	int radius;
+	std::string tag;
+	bool draw_bounding_box = false;
+	llvm::SmallDenseSet<Entity, 8> collisions;
+};
