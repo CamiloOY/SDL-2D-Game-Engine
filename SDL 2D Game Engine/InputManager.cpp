@@ -10,10 +10,14 @@ InputManager::InputManager() {
 void InputManager::handleEvent(SDL_Event* e) {
 	switch(e->type) {
 	case SDL_KEYDOWN:
-		commands[static_cast<uint8_t>(key_to_command.lookup((SDL_KeyCode&) e->key.keysym.sym))] = true;
+		if(key_to_command.count((SDL_KeyCode&) e->key.keysym.sym)) {
+			commands[static_cast<uint8_t>(key_to_command.lookup((SDL_KeyCode&) e->key.keysym.sym))] = true;
+		}
 		break;
 	case SDL_KEYUP:
-		commands[static_cast<uint8_t>(key_to_command.lookup((SDL_KeyCode&) e->key.keysym.sym))] = false;
+		if(key_to_command.count((SDL_KeyCode&) e->key.keysym.sym)) {
+			commands[static_cast<uint8_t>(key_to_command.lookup((SDL_KeyCode&) e->key.keysym.sym))] = false;
+		}
 		break;
 	default:
 		break;
