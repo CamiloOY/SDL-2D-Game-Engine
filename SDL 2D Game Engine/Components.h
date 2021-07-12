@@ -4,6 +4,7 @@
 #include "Types.h"
 #include <string>
 #include <llvm/ADT/SmallSet.h>
+#include <variant>
 
 struct Sprite {
 	SDL_Texture* texture;
@@ -43,3 +44,5 @@ struct CircleCollider {
 	bool draw_bounding_box = false;
 	llvm::SmallDenseSet<Entity, 8> collisions;
 };
+
+using Collider = std::variant<RectCollider, CircleCollider>;

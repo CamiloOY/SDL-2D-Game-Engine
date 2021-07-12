@@ -52,7 +52,7 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 				manager.registerComponent<Transform>();
 				manager.registerComponent<Movement>();
 				manager.registerComponent<BasicEnemyAI>();
-				manager.registerComponent<RectCollider>();
+				manager.registerComponent<Collider>();
 
 				renderSystem = manager.registerSystem<RenderSystem>();
 				Signature render_system_sig;
@@ -74,29 +74,31 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 
 				collisionSystem = manager.registerSystem<CollisionSystem>();
 				Signature collision_system_sig;
-				collision_system_sig.set(manager.getComponentType<RectCollider>());
+				collision_system_sig.set(manager.getComponentType<Collider>());
 				collision_system_sig.set(manager.getComponentType<Transform>());
 				manager.setSystemSignature<CollisionSystem>(collision_system_sig);
 
-				Sprite player_sprite;
-				player_sprite.texture = TextureManager::LoadTexture("assets/pirate.png");
-				Sprite slime_sprite;
-				slime_sprite.texture = TextureManager::LoadTexture("assets/slime.png");
+				Sprite* player_sprite = new Sprite;
+				player_sprite->texture = TextureManager::LoadTexture("assets/pirate.png");
+				Sprite* slime_sprite = new Sprite;
+				slime_sprite->texture = TextureManager::LoadTexture("assets/slime.png");
 				Transform player_transform = {{33, 33}};
 				Transform slime_transform = {{400, 99}, {4, 4}};
 				Movement player_movement = {3};
 				BasicEnemyAI slime_ai = {1, 1, 100};
-				RectCollider player_collider = {0, 0, 36, 116, "Player"};
-				RectCollider slime_collider = {0, 0, 60, 40, "Slime"};
+				RectCollider* player_collider = new RectCollider{0, 0, 36, 116, "Player"};
+				Collider player_coll_comp = *player_collider;
+				RectCollider* slime_collider = new RectCollider{0, 0, 60, 40, "Slime"};
+				Collider slime_collider_component = *slime_collider;
 
-				manager.addComponent<Sprite>(player, player_sprite);
+				manager.addComponent<Sprite>(player, *player_sprite);
 				manager.addComponent<Transform>(player, player_transform);
 				manager.addComponent<Movement>(player, player_movement);
-				manager.addComponent<RectCollider>(player, player_collider);
-				manager.addComponent<Sprite>(slime, slime_sprite);
+				manager.addComponent<Collider>(player, player_coll_comp);
+				manager.addComponent<Sprite>(slime, *slime_sprite);
 				manager.addComponent<Transform>(slime, slime_transform);
 				manager.addComponent<BasicEnemyAI>(slime, slime_ai);
-				manager.addComponent<RectCollider>(slime, slime_collider);
+				manager.addComponent<Collider>(slime, slime_collider_component);
 			}
 		}
 	}
