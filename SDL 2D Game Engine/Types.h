@@ -26,3 +26,8 @@ enum class Command : uint8_t {
 	MOVE_UP,
 	MOVE_DOWN
 };
+
+enum class ColliderType : uint8_t {
+	Rect,
+	Circle
+};
