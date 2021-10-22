@@ -4,7 +4,7 @@
 Tilemap::Tilemap() {
 	this->dirt = TextureManager::LoadTexture("assets/dirt.png");
 	this->grass = TextureManager::LoadTexture("assets/grass.png");
-	int default_map[20][25];
+	int default_map[20][25]; // Create a default map of just dirt
 	for(int c = 0; c < 20; c++) {
 		for(int i = 0; i < 25; i++) {
 			default_map[c][i] = 1;

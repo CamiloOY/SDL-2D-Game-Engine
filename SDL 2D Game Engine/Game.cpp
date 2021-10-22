@@ -48,12 +48,14 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 				player = manager.createEntity();
 				slime = manager.createEntity();
 
+				// Registering component types
 				manager.registerComponent<Sprite>();
 				manager.registerComponent<Transform>();
 				manager.registerComponent<Movement>();
 				manager.registerComponent<BasicEnemyAI>();
 				manager.registerComponent<RectCollider>();
 
+				// Initialising systems and their signatures
 				renderSystem = manager.registerSystem<RenderSystem>();
 				Signature render_system_sig;
 				render_system_sig.set(manager.getComponentType<Sprite>());
@@ -79,6 +81,7 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 				collision_system_sig.set(manager.getComponentType<Transform>());
 				manager.setSystemSignature<CollisionSystem>(collision_system_sig);
 
+				// Creating actual components to store the data
 				Sprite player_sprite;
 				player_sprite.texture = TextureManager::LoadTexture("assets/pirate.png");
 				Sprite slime_sprite;
@@ -90,6 +93,7 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 				RectCollider player_collider = {0, 0, 36, 116, "Player", true};
 				RectCollider slime_collider = {0, 0, 60, 40, "Slime", true};
 
+				// Attaching components to entities
 				manager.addComponent<Sprite>(player, player_sprite);
 				manager.addComponent<Transform>(player, player_transform);
 				manager.addComponent<Movement>(player, player_movement);

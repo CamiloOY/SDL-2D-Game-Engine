@@ -1,6 +1,6 @@
 #include "InputManager.h"
 
-InputManager::InputManager() {
+InputManager::InputManager() { // Initialise WASD keys
 	key_to_command[SDL_GetKeyFromName("A")] = Command::MOVE_LEFT;
 	key_to_command[SDL_GetKeyFromName("D")] = Command::MOVE_RIGHT;
 	key_to_command[SDL_GetKeyFromName("W")] = Command::MOVE_UP;
@@ -10,7 +10,7 @@ InputManager::InputManager() {
 void InputManager::handleEvent(SDL_Event* e) {
 	switch(e->type) {
 	case SDL_KEYDOWN:
-		if(key_to_command.count((SDL_KeyCode&) e->key.keysym.sym)) {
+		if(key_to_command.count((SDL_KeyCode&) e->key.keysym.sym)) { // If the key pressed has an associated command, then trigger said command
 			commands[static_cast<uint8_t>(key_to_command.lookup((SDL_KeyCode&) e->key.keysym.sym))] = true;
 		}
 		break;
@@ -34,4 +34,8 @@ bool InputManager::getCommand(Command c) {
 
 void InputManager::setKeyCommand(SDL_Keycode key, Command command) {
 	key_to_command[key] = command;
+}
+
+void InputManager::unbindKey(SDL_Keycode key) {
+	key_to_command.erase(key);
 }

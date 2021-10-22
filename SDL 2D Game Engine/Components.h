@@ -28,11 +28,15 @@ struct BasicEnemyAI {
 };
 
 struct RectCollider {
+	// The position of the collider relative to the entity's transform
 	int relative_x = 0;
 	int relative_y = 0;
+
+	// The size of the bounding box
 	int w;
 	int h;
-	std::string tag;
-	bool draw_bounding_box = false;
+
+	std::string tag; // A tag describing the collider
+	bool draw_bounding_box = false; // Whether the bounding box should be drawn (for debug purposes)
 	llvm::SmallDenseSet<Entity, 8> collisions;
 };

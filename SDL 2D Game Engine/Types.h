@@ -28,6 +28,9 @@ public:
 	float x;
 	float y;
 
+	/*
+	* Normalises the magnitude of the vector to 1 (while keeping the same direction)
+	*/
 	void normalise() {
 		float divisor = sqrt(pow(x, 2) + pow(y, 2));
 		x /= divisor;
