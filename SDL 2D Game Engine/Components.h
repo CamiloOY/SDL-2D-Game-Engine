@@ -25,15 +25,12 @@ struct BasicEnemyAI {
 	int travelled = 0;
 };
 
-struct Collider {
+struct RectCollider {
 	int relative_x = 0;
 	int relative_y = 0;
+	int w;
+	int h;
 	std::string tag;
 	bool draw_bounding_box = false;
-	ColliderType type;
-	union {
-		Vec2 dimensions;
-		int radius;
-	};
 	llvm::SmallDenseSet<Entity, 8> collisions;
 };
