@@ -52,7 +52,7 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 				manager.registerComponent<Transform>();
 				manager.registerComponent<Movement>();
 				manager.registerComponent<BasicEnemyAI>();
-				manager.registerComponent<Collider>();
+				manager.registerComponent<RectCollider>();
 
 				renderSystem = manager.registerSystem<RenderSystem>();
 				Signature render_system_sig;
@@ -74,7 +74,7 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 
 				collisionSystem = manager.registerSystem<CollisionSystem>();
 				Signature collision_system_sig;
-				collision_system_sig.set(manager.getComponentType<Collider>());
+				collision_system_sig.set(manager.getComponentType<RectCollider>());
 				collision_system_sig.set(manager.getComponentType<Transform>());
 				manager.setSystemSignature<CollisionSystem>(collision_system_sig);
 
@@ -86,17 +86,17 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 				Transform slime_transform = {{400, 99}, {4, 4}};
 				Movement player_movement = {3};
 				BasicEnemyAI slime_ai = {1, 1, 100};
-				Collider player_collider = {0, 0, "Player", false, ColliderType::Rect, {36, 116}};
-				Collider slime_collider = {0, 0, "Slime", false, ColliderType::Rect, {60, 40}};
+				RectCollider player_collider = {0, 0, 36, 116, "Player", true};
+				RectCollider slime_collider = {0, 0, 60, 40, "Slime", true};
 
 				manager.addComponent<Sprite>(player, player_sprite);
 				manager.addComponent<Transform>(player, player_transform);
 				manager.addComponent<Movement>(player, player_movement);
-				manager.addComponent<Collider>(player, player_collider);
+				manager.addComponent<RectCollider>(player, player_collider);
 				manager.addComponent<Sprite>(slime, slime_sprite);
 				manager.addComponent<Transform>(slime, slime_transform);
 				manager.addComponent<BasicEnemyAI>(slime, slime_ai);
-				manager.addComponent<Collider>(slime, slime_collider);
+				manager.addComponent<RectCollider>(slime, slime_collider);
 			}
 		}
 	}

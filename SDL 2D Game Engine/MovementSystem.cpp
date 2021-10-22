@@ -26,9 +26,9 @@ void MovementSystem::move(Vec2 direction) {
 	for(Entity& entity : entities) {
 		Transform& transform = manager.getComponent<Transform>(entity);
 		Movement& movement = manager.getComponent<Movement>(entity);
-		Collider& collider = manager.getComponent<Collider>(entity);
+		RectCollider& collider = manager.getComponent<RectCollider>(entity);
 		for(Entity collision : collider.collisions) {
-			Collider& collided = manager.getComponent<Collider>(collision);
+			RectCollider& collided = manager.getComponent<RectCollider>(collision);
 			std::cout << collider.tag << " collided with " << collided.tag << std::endl;
 		}
 		transform.position.x += movement.speed * direction.x;
