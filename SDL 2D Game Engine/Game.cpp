@@ -70,6 +70,7 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 				Signature basic_enemy_ai_system_sig;
 				basic_enemy_ai_system_sig.set(manager.getComponentType<BasicEnemyAI>());
 				basic_enemy_ai_system_sig.set(manager.getComponentType<Transform>());
+				basic_enemy_ai_system_sig.set(manager.getComponentType<RectCollider>());
 				manager.setSystemSignature<BasicEnemyAISystem>(basic_enemy_ai_system_sig);
 
 				collisionSystem = manager.registerSystem<CollisionSystem>();

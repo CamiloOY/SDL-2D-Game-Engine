@@ -10,7 +10,7 @@ struct Sprite {
 };
 
 struct Transform {
-	Vec2 position = {0, 0};
+	Vec2f position = {0, 0};
 	Vec2f scale = {1, 1};
 };
 
@@ -23,6 +23,8 @@ struct BasicEnemyAI {
 	float speed = 1;
 	int distance = 50;
 	int travelled = 0;
+	bool angered = false;
+	Entity target;
 };
 
 struct RectCollider {
