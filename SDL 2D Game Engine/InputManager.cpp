@@ -35,7 +35,3 @@ bool InputManager::getCommand(Command c) {
 void InputManager::setKeyCommand(SDL_Keycode key, Command command) {
 	key_to_command[key] = command;
 }
-
-void InputManager::unbindKey(SDL_Keycode key) {
-	key_to_command.erase(key);
-}

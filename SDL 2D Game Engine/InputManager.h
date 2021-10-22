@@ -10,7 +10,6 @@ public:
 	SDL_Event& getEvent(); // Returns the current event object
 	bool getCommand(Command c); // Gets whether the provided command is active
 	void setKeyCommand(SDL_Keycode key, Command command); // Changes the command a key performs
-	void unbindKey(SDL_Keycode key); // Removes a key's command
 
 private:
 	SDL_Event e;
