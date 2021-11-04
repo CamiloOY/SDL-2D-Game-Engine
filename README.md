@@ -26,6 +26,9 @@ This system can be used to give enemies basic behaviour. Enemies can be in two s
 ## ECS Architecture
 ### Definitions
 **Entity:** An entity is an object in the game world and is represented as an ID that is used to group several components.
+
 **Component:** A component is structured data that stores information about an entity.
+
 **System:** A system is something that performs some function on every entity matching its signature (whether that be manipulating the data in the entity's components, or using the component data to render something).
+
 **Signature:** The signature of an entity is a representation of the components it needs access to in order to perform its functionality.
