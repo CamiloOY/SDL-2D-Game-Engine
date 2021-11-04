@@ -31,4 +31,10 @@ This system can be used to give enemies basic behaviour. Enemies can be in two s
 
 **System:** A system is something that performs some function on every entity matching its signature (whether that be manipulating the data in the entity's components, or using the component data to render something).
 
-**Signature:** The signature of an entity is a representation of the components it needs access to in order to perform its functionality.
+**Signature:** The signature of a system is a representation of the components it needs access to in order to perform its functionality. The signature of an entity is a representation of the types of components it has associated with it.
+
+### Classes
+#### System
+The base class for all systems, this class simply contains a DenseSet of all entities matching the system's signature.
+#### EntityManager
+This class is responsible for creating and destroying entities, as well as keeping track of their signatures.
