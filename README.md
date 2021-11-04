@@ -43,3 +43,13 @@ This system can be used to give enemies basic behaviour. Enemies can be in two s
 **SystemManager:** The SystemManager tracks system signatures, keeping systems updated on which entities they should be operating on. All systems must register with this class before they can be used.
 
 **Manager:** The overall manager that presents a unified interface for the three previously mentioned managers. This is the class that the client code will interact with, and it makes the relevant calls to the EntityManager, ComponentManager and SystemManager. For example, when you tell the manager to add a component to an entity, it will update that entity's signature and tell the SystemManager to notify the systems about the entity's updated signature.
+
+## Videos
+
+https://user-images.githubusercontent.com/73787256/140425985-58f84cff-61c1-401b-adb4-32cfc61bd786.mp4
+
+
+
+
+https://user-images.githubusercontent.com/73787256/140426017-ead8ca31-ae50-4cd9-a696-cc7ff16569f7.mp4
+
