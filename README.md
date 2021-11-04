@@ -34,7 +34,12 @@ This system can be used to give enemies basic behaviour. Enemies can be in two s
 **Signature:** The signature of a system is a representation of the components it needs access to in order to perform its functionality. The signature of an entity is a representation of the types of components it has associated with it.
 
 ### Classes
-#### System
-The base class for all systems, this class simply contains a DenseSet of all entities matching the system's signature.
-#### EntityManager
-This class is responsible for creating and destroying entities, as well as keeping track of their signatures.
+**System:** The base class for all systems, this class simply contains a DenseSet of all entities matching the system's signature.
+
+**EntityManager:** This class is responsible for creating and destroying entities, as well as keeping track of their signatures.
+
+**ComponentManager:** The class in control of associating components with entities. All components must register with this class before they can be used.
+
+**SystemManager:** The SystemManager tracks system signatures, keeping systems updated on which entities they should be operating on. All systems must register with this class before they can be used.
+
+**Manager:** The overall manager that presents a unified interface for the three previously mentioned managers. This is the class that the client code will interact with, and it makes the relevant calls to the EntityManager, ComponentManager and SystemManager. For example, when you tell the manager to add a component to an entity, it will update that entity's signature and tell the SystemManager to notify the systems about the entity's updated signature.
